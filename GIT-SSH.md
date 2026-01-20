@@ -15,10 +15,11 @@ ghbruker - byttes ut med ditt brukernavn for github kontoen, som du bruker i DAT
 Først, sørg for at du har **OpenSSH Client** installert. Moderne versjoner av macOS inkluderer dette som standard. Du kan verifisere installasjonen ved å åpne Terminal og kjøre `ssh -V`.
 
 Eksempel (eksemplene er utført på Sonoma 14.3.1, Apple M2 Pro):
-  ```bash
+
+```bash
   $ ssh -V
   OpenSSH_9.4p1, LibreSSL 3.3.6
-  ```
+```
 ### Steg 2: Generer nøkkel for din konto
 Generer et unikt SSH-nøkkelpar for GitHub-kontoen din. Det er kritisk å lagre nøkkel i en fil med et spesifikt navn for å unngå overskriving.
 
@@ -36,12 +37,23 @@ SSH-agenten er et bakgrunnsprogram som holder styr på SSH-nøklene dine og pass
 
 1.  **Sørg for at SSH-agenten kjører**. Åpne Terminal som administrator og kjør følgende kommandoer:
 
-Eksempel (tallet for prosessen blir forskjellig fra datamaskin til datamaskin):
-    ```bash
-    # Sjekk statusen til agenten
+Eksempel for å sjekke at ssh-agent utfører:
+
+```bash
+    # Sjekk om en prosess med navn ssh-agent utfører på din maskin
+    $ ps aux | grep ssh-agent
+    janisg            5230   0.0  0.0 407999680   1536   ??  S    Sun09AM   0:00.05 /usr/bin/ssh-agent -l
+    janisg           34097   0.0  0.0 408626944   1360 s001  S+    3:02PM   0:00.01 grep ssh-agent
+```
+Hvis du får lignende output, trenger du ikke å starte agenten på nytt. Hvis du allikevel utfører oppstartskommandoen for ssh-agent, vil du overskrive den kjørende prosessen og den nye prosessen vil ta over. Det "gamle" prosessen vil fortsatte "sove" i prosess-rommet på din datamaskin. Det ser ikke ut at det har store komplikasjoner, men unngå å utføre start-kommandoen, hvis du ser at en prosess allerede utføres.
+
+Eksempel hvis den må startes (tallet for prosessen blir forskjellig fra datamaskin til datamaskin):
+
+```bash
+    # Starter agenten
     $ eval "$(ssh-agent -s)"
     Agent pid 8383
-    ```
+```
 
 2.  **Legg til de nye SSH-nøklene** i agenten:
 
