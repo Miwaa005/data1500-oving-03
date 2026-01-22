@@ -136,6 +136,24 @@ Bruk denne delen til å dokumentere interessante funn, problemer du møtte, elle
 
 [Skriv dine notater her]
 
+
+## Oppgave 4: Brukeradministrasjon og GRANT
+
+1. **Hva er Row-Level Security og hvorfor er det viktig?**
+   - Svar her...
+
+2. **Hva er forskjellen mellom RLS og kolonnebegrenset tilgang?**
+   - Svar her...
+
+3. **Hvordan ville du implementert at en student bare kan se karakterer for sitt eget program?**
+   - Svar her...
+
+4. **Hva er sikkerhetsproblemene ved å bruke views i stedet for RLS?**
+   - Svar her...
+
+5. **Hvordan ville du testet at RLS-policyer fungerer korrekt?**
+   - Svar her...
+
 ---
 
 ## Referanser
