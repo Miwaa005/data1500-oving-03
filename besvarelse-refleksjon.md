@@ -10,40 +10,35 @@ Skriv dine svar på refleksjonsspørsmålene fra hver oppgave her.
 
 **Ditt svar:**
 
-[Skriv ditt svar her]
-
+Å bruke docker sørger for at man ikke trenger et konsistent miljø eller samme maskin for å åpne applikasjoner, siden Docker-containeren inneholder miljøet (OS, biblioteker, kode) som trengs for å kjøre den. Det gjør at PostgresSQL blir enklere å innstallere og mer tilgjengelig for bruk av f.eks. studenter med ulikt miljø.
 ---
 
 ### Spørsmål 2: Hva betyr "persistent volum" i docker-compose.yml? Hvorfor er det viktig?
 
 **Ditt svar:**
 
-[Skriv ditt svar her]
-
+'persistent volum' vil si at dataen blir lagret i sti, eller 'volum'. Det lagres lokalt, utenfor containeren og er viktig for å unngå at dataen går tapt når containeren stoppes/slettes/restartes.
 ---
 
 ### Spørsmål 3: Hva skjer når du kjører `docker-compose down`? Mister du dataene?
 
 **Ditt svar:**
 
-[Skriv ditt svar her]
-
+docker-compose down stopper containeren, men sletter ikke dataene siden de lagres i volum.
 ---
 
 ### Spørsmål 4: Forklar hva som skjer når du kjører `docker-compose up -d` første gang vs. andre gang.
 
 **Ditt svar:**
 
-[Skriv ditt svar her]
-
+Første gang man starter opp containeren er det flere ting som må lastes inn, som image, containeren og volum opprettes. Andre gang eksisterer disse tingene allerede, så containeren starter raskere.
 ---
 
 ### Spørsmål 5: Hvordan ville du delt docker-compose.yml-filen med en annen student? Hvilke sikkerhetshensyn må du ta?
 
 **Ditt svar:**
 
-[Skriv ditt svar her]
-
+Man bør ta hensyn til at det er sårbar informasjon i klartekst, som brukernavn og passord. Det kan f.eks. lagres i en egen fil som ikke deles, eller sendes separat hvis man skal jobbe på samme bruker.
 ---
 
 ## Oppgave 2: SQL-spørringer og databaseskjema
