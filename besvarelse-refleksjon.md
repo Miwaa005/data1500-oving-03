@@ -119,25 +119,24 @@ Enten ved å opprette et view, da får de sin egen personlige kopi av tabellen m
 
 Bruk denne delen til å dokumentere interessante funn, problemer du møtte, eller andre observasjoner:
 
-[Skriv dine notater her]
-
+I \du får man oversikt over roller. Man kan se at alle brukere er teknisk sett er en rolle med innlogging, i tillegg til evt. en tildelt rolle (uten innlogging) som samler rettighetene deres: f.eks. student_1, student_2, student_3 er brukere/roller med innlogging, men de har også en felles rolle student_role.
 
 ## Oppgave 4: Brukeradministrasjon og GRANT
 
 1. **Hva er Row-Level Security og hvorfor er det viktig?**
-   - Row-Level Security (RLS) er at man begrenser brukernes tilgang til kun deres rad, ved å sjekke hvilke rader som oppfyller en bestemt betingelse (hvor raden = bruker)
+   - Row-Level Security (RLS) er at man begrenser brukernes tilgang til rader med en policy, ved å sjekke hvilke rader som oppfyller en bestemt betingelse (f.eks. hvor raden = bruker). Det gir tilgangskontroll og settes i databasen, ikke i applikasjonen, og det hindrer datalekkasjer selv om applikasjonskoden er feil.
 
 2. **Hva er forskjellen mellom RLS og kolonnebegrenset tilgang?**
-   - Forskjellen er at CLS begrenser brukeres tilgang til antall synlige kolonner, f.eks. at hver bruker kun ser kolonnene for karakter, brukerID og emneID, men utelater navn. Brukerne vil kunne se alle rader, men kjenner kun til sin egen rad. RLS begrenser synlighet ved å utelate rader som ikke er relevante for brukeren.
+   - Forskjellen er at kolonnebegrenset tilgang begrenser brukeres tilgang til antall synlige kolonner, f.eks. at hver bruker kun ser kolonnene for karakter, brukerID og emneID, men utelater navn. Brukerne vil kunne se alle rader. RLS begrenser synlighet ved å utelate rader som ikke er tillatt for brukeren.
 
 3. **Hvordan ville du implementert at en student bare kan se karakterer for sitt eget program?**
-   - Ved å bruke RLS, slik at kun deres rad i databasen er synlig.
+   - Ved å bruke RLS, slik at kun deres rad i databasen er synlig. Da må man enable rls for tabellen og lage en policy som tillater select for rader hvor brukernavnet = current_user. Det gjør at karakteren er beskyttet for alle som ikke har granted access og policy som tillater select.
 
 4. **Hva er sikkerhetsproblemene ved å bruke views i stedet for RLS?**
-   - Svar her...
+   - Views er ikke et sikkerhetstiltak, sånn som rls. Det brukes for å presentere en kopi av en tabell, ikke nødvendigvis utelukke tilgang til rader. Brukeren vil fortsatt kunne se den originale tabellen hvis de har rettigheter til det. RLS er tryggere fordi den ikke kan omgås uten riktige rettigheter.
 
 5. **Hvordan ville du testet at RLS-policyer fungerer korrekt?**
-   - Svar her...
+   - RLS-policyer kan testes ved å logge inn som ulike brukere og gjøre select, update eller delete for å sjekke om de har tilgang på det de skal. Man kan også sjekke policyene i pg_policies.
 
 ---
 
